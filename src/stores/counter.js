@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
+import axios from 'axios';
 
 export const useCounterStore = defineStore('counter',{
     state:()=>({
+        posts:[],
         counter:7,
         attempts:0,
         prizes:[
@@ -34,6 +36,24 @@ export const useCounterStore = defineStore('counter',{
             return {
                 prize,
                 attempts: this.getAttemps
+            }
+        }
+    },
+    actions:{
+        add(){
+            this.counter++
+        },
+        subtract(){
+            this.counter--
+        },
+        async getPosts(limit){
+            try{
+                const response = await axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
+                this.add();
+                console.log(this.getCount)
+                this.posts = response.data;
+            }catch(error){
+                console.log(error)
             }
         }
     }

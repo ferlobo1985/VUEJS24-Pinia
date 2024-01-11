@@ -7,8 +7,8 @@
         <strong> Change count:{{ count }} </strong>
       </p>
 
-      <button type="button" class="btn btn-primary me-3" @click="add">+</button>
-      <button type="button" class="btn btn-outline-secondary"  @click="subtract">-</button>
+      <button type="button" class="btn btn-primary me-3" @click="store.add">+</button>
+      <button type="button" class="btn btn-outline-secondary"  @click="store.subtract">-</button>
 
       <hr/>
       <p>{{ store.car.brand }}</p>
@@ -21,6 +21,24 @@
         Patch state
       </button>
 
+      <div>
+        <hr/>
+        <ul>
+          <li v-for="(post) in store.posts">
+            {{ post.title }}
+          </li>
+        </ul>
+        <button
+          type="button"
+          class="btn btn-primary me-3"
+          @click="store.getPosts(10)"
+        >
+          Get posts
+        </button>
+
+      </div>
+
+
     </div>
   </div>
 </template>
@@ -32,8 +50,8 @@
 
   const count = computed(()=>store.getCount);
 
-  const add = () => store.counter++;
-  const subtract = () => store.counter--;
+  // const add = () => store.counter++;
+  // const subtract = () => store.counter--;
 
   const patchState = () => {
     store.$patch({
