@@ -30,7 +30,7 @@
   import { computed } from 'vue';
   const store = useCounterStore();
 
-  const count = computed(()=>store.counter);
+  const count = computed(()=>store.getCount);
 
   const add = () => store.counter++;
   const subtract = () => store.counter--;
